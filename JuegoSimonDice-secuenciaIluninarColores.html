@@ -123,6 +123,12 @@
             this.iluminarSecuencia()
         }
 
+        generarSecuencia(){
+            //JS crea por nosotros el atributo si no lo definimos antes
+            //asi como en la linea de abajo
+            this.secuencia = new Array( 10 ).fill( 0 )
+            .map( n => Math.floor( Math.random() * 4) )
+        }
         transformarNumeroAColor( numero ){
             switch( numero ){
                 case 0:
@@ -140,24 +146,17 @@
             for( let i = 0; i < this.nivel; i++ ){
                 const color = this.transformarNumeroAColor( this.secuencia[ i ] )
                 setTimeout( () => this.iluminarColor( color ), 1000 * i )
-            }
+           }
         }
 
-        iluminiarColor( color ) {
+        iluminarColor( color ) {
             this.colores[ color ].classList.add( 'light' )
             setTimeout( () => this.apagarColor( color ), 350 )
         }
 
         apagarColor( color ){
             this.colores[ color ].classList.remove( 'light' )
-        }
-        
-        generarSecuencia(){
-            //JS crea por nosotros el atributo si no lo definimos antes
-            //asi como en la linea de abajo
-            this.secuencia = new Array( 10 ).fill( 0 )
-            .map( n => Math.floor( Math.random() * 4) )
-        }
+        }        
     }
       
 
