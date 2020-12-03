@@ -111,7 +111,7 @@
         inicializar() {
             // La linea de codigo de abajo nos permite mantener la referencia de this 
             // al objeto juegoS
-            this.elegirColor = this.elegirColor.bind( this )
+           this.elegirColor = this.elegirColor.bind( this )
           btnEmpezar.classList.add('hide')
           this.nivel = 1
           this.colores ={//si nuestros atributos tienen el mismo nombre que la variable que vamos asignar podemos aserlo de la siguiente manera
@@ -171,7 +171,7 @@
     }
 
     elegirColor(ev){
-        console.log(this)
+        console.log( ev )
     }
       }
 
