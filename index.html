@@ -142,7 +142,6 @@
                this.elegirColor = this.elegirColor.bind( this )
                this.siguienteNivel = this.siguienteNivel.bind( this )
                btnEmpezar.classList.toggle('hide')
-               
                this.nivel = 1
                this.colores = {//si nuestros atributos tienen el mismo nombre que la variable que vamos asignar podemos aserlo de la siguiente manera
                  celeste,
@@ -150,6 +149,8 @@
                  naranja,
                  verde
                }
+               nivelActual.innerHTML = `Nivel: ${this.nivel}`
+               puntajeActual.innerHTML = `Puntaje: ${puntaje}`
              }
      
              generarSecuencia(){
@@ -237,12 +238,14 @@
                 this.nivel++
                 if( this.nivel === ( ULTIMO_NIVEL + 1 ) ){
                   this.ganoElJuego()
+                  puntaje = 0
                 }else{
                   setTimeout( this.siguienteNivel, 1500 )
                 }
                }
              }else{
                 this.perdioElJuego()
+                puntaje = 0 
              }
             
 
@@ -258,6 +261,7 @@
                   this.eliminarEventosClick()
                   this.inicializar()
               })
+              
         }
            }
 
