@@ -12,9 +12,23 @@
              display: flex;
              align-items: center;
              height: 100vh;
+             display: flex;
+             align-items: center;
+             justify-content: flex-start;
+             flex-direction: column;
            }
+           
+           .tablero{
+            width: 50%;
+            height: 20%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-top: 20px;
+            }
      
            .gameboard {
+            
              height: 100vh;
              width: 100vh;
              border-radius: 50%;
@@ -22,7 +36,7 @@
              margin: 0 auto;
              max-height: 60vh;
              max-width: 60vh;
-           }
+             }
      
            .color {
              width: 50%;
@@ -90,6 +104,10 @@
          </style>
        </head>
        <body>
+         <div class="tablero">
+           <div id= "puntaje" >Puntaje: 0</div>
+           <div id="nivel">Nivel:  0</div>
+         </div>
          <div class="gameboard">
            <div id="celeste" class="color celeste left" data-color="celeste"></div>
            <div id="violeta" class="color violeta right" data-color="violeta"></div>
@@ -105,6 +123,9 @@
            const violeta = document.getElementById('violeta')
            const naranja = document.getElementById('naranja')
            const verde = document.getElementById('verde')
+           const nivelActual = document.getElementById('nivel')
+           const puntajeActual = document.getElementById('puntaje')
+           let puntaje = 0
            const ULTIMO_NIVEL = 5
      
            class Juego {
@@ -121,6 +142,7 @@
                this.elegirColor = this.elegirColor.bind( this )
                this.siguienteNivel = this.siguienteNivel.bind( this )
                btnEmpezar.classList.toggle('hide')
+               
                this.nivel = 1
                this.colores = {//si nuestros atributos tienen el mismo nombre que la variable que vamos asignar podemos aserlo de la siguiente manera
                  celeste,
@@ -142,7 +164,6 @@
                  this.agregarEventosClick()
              }
      
-
              transformarNumeroAColor( numero ){
                  switch( numero ){
                      case 0:
@@ -184,8 +205,7 @@
              apagarColor( color ){
                  this.colores[color].classList.remove('light')
              }        
-         
-     
+              
          agregarEventosClick(){
              this.colores.celeste.addEventListener( 'click', this.elegirColor )
              this.colores.naranja.addEventListener( 'click', this.elegirColor )
@@ -202,14 +222,17 @@
         // addEventListener nos arrojara los eventos del mouse y todos sus atributos
         // target es un atributo que contiene a su vez el atributo dataset que nos permite
         // obtener el valor del boton que se le hizo click     
-         elegirColor( ev ){
+         elegirColor( ev ){ 
              const nombreColor = ev.target.dataset.color
              const numeroColor = this.transformarColorANumero( nombreColor ) 
              this.iluminarColor( nombreColor )
              
-             if ( numeroColor === this.secuencia[this.subNivel]){
+             if ( numeroColor === this.secuencia[this.subNivel]){             
                this.subNivel++
                if ( this.subNivel === this.nivel ){
+                nivelActual.innerHTML = `Nivel: ${this.nivel}`
+                puntaje += 2
+                puntajeActual.innerHTML = `Puntaje: ${puntaje}`
                 this.eliminarEventosClick()
                 this.nivel++
                 if( this.nivel === ( ULTIMO_NIVEL + 1 ) ){
@@ -221,6 +244,7 @@
              }else{
                 this.perdioElJuego()
              }
+            
 
          }
        ganoElJuego(){
