@@ -237,26 +237,26 @@
                 this.eliminarEventosClick()
                 this.nivel++
                 if( this.nivel === ( ULTIMO_NIVEL + 1 ) ){
-                  this.ganoElJuego()
+                  this.ganoElJuego( jugador )
                   puntaje = 0
                 }else{
                   setTimeout( this.siguienteNivel, 1500 )
                 }
                }
              }else{
-                this.perdioElJuego()
+                this.perdioElJuego( jugador )
                 puntaje = 0 
              }
             
 
          }
-       ganoElJuego(){
-              swal('Simon Dice', 'Felicidades. Has ganado el juego.', 'success')
+       ganoElJuego( nombre ){
+              swal('Simon Dice', `Felicidades ${nombre}. Has ganado el juego.`, 'success')
               .then( this.inicializar )
               
        }
-        perdioElJuego(){
-              swal('Simon Dice', 'Perdiste. Lo sentimos.', 'error' )
+        perdioElJuego( nombre ){
+              swal('Simon Dice', `Perdiste ${nombre}. Lo sentimos.`, 'error' )
               .then( () => {
                   this.eliminarEventosClick()
                   this.inicializar()
@@ -271,6 +271,7 @@
                  text:`${nombre}, Simon dice Es un juego de memorizacion. 
                  Tienes que repetir la secuencia de los colores iluminados`,
                })
+               this.jugador = nombre
              }
           
           function registrarNombre(){
